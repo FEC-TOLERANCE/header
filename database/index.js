@@ -43,7 +43,3 @@ for (let i = 0; i < data.length; i++) {
 
 //iterate 100 times inputing data into an instance of mymodel
 //promimse all to save all instances
-
-
-
-
