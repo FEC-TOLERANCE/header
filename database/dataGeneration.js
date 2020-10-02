@@ -49,7 +49,7 @@ var names = (count) => {
     var name = '';
     name += (firstNameList[(Math.floor(Math.random() * Math.floor(firstNameList.length)))]);
     name += ' ';
-    name += (lastNameList[(Math.floor(Math.random() * Math.floor(lastNameList.length)))])
+    name += (lastNameList[(Math.floor(Math.random() * Math.floor(lastNameList.length)))]);
     results.push(name);
   }
   return results.join();
@@ -59,7 +59,7 @@ var title = (length) => {
   var results = '';
   var titleList = ['here', 'is', 'a', 'list', 'of', 'titles'];
   for (var i = 0; i < length; i++) {
-    results += titleList[(Math.floor(Math.random() * Math.floor(titleList.length)))]
+    results += titleList[(Math.floor(Math.random() * Math.floor(titleList.length)))];
     results += ' ';
   }
   return results;
@@ -97,25 +97,14 @@ var description = (length) => {
 let videoArray = [];
 
 var video = (count) => {
-  //query youtube with random search term
-  axios.get('https://www.googleapis.com/youtube/v3/search', {
+  return axios.get('https://www.googleapis.com/youtube/v3/search', {
     params: {
       key: key.key,
-      maxResults: 100,
+      maxResults: 1,
       q: 'dogs',
     }
-  })
-    .then((videoData) => {
-      // console.log('videoData', videoData.data);
-    })
-    .catch((err) => {
-      console.log('err', err);
-    });
+  });
 };
-
-// var image = (count) => {
-//   //query sploosh for image based on random word
-// };
 
 var currency = () => {
   var currencyOptions = ['USD', 'EUR', 'AUD', 'GBP', 'JPY', 'CHF', 'AFN', 'ALL'];
@@ -125,7 +114,7 @@ var currency = () => {
 let counter = 0;
 var objectCreation = () => {
   // var fundingGoal = number(4 + randomUpTo(5), 0);
-  var fundingGoal = randomUpTo(100000)
+  var fundingGoal = randomUpTo(100000);
   var pledged = randomUpTo(100000);
   // if (randomUpTo(5) === 4) {
   //   pledged = randomUpTo(10) * fundingGoal;
@@ -140,30 +129,35 @@ var objectCreation = () => {
   var endDate = date(true);
 
   let generateData = () => {
-    video();
-    counter++;
-    var randomizedData = {
-      id: counter,
-      backing: {
-        fundingGoal: fundingGoal,
-        pledged: pledged,
-        backers: backers,
-        description: paragraph,
-        daysRemaining: days,
-        endDate: endDate,
-      },
-      header: {
-        title: header,
-        videoData: videoArray[counter],
-      }
-    };
-    return randomizedData;
+    return video()
+      .then((videoData) => {
+        console.log('videoData', videoData);
+        counter++;
+        var randomizedData = {
+          id: counter,
+          backing: {
+            fundingGoal: fundingGoal,
+            pledged: pledged,
+            backers: backers,
+            description: paragraph,
+            daysRemaining: days,
+            endDate: endDate,
+          },
+          header: {
+            title: header,
+            videoData: videoData,
+          }
+        };
+        return randomizedData;
+      });
+    return generateData();
   };
-  return generateData();
 };
-let dataResults = [];
-for (let i = 0; i < 3; i++) {
-  dataResults.push(objectCreation());
-}
 
-module.exports.dataResults = dataResults;
+// let dataResults = [];
+// for (let i = 0; i < 3; i++) {
+//   dataResults.push(objectCreation());
+// }
+// console.log('dataResults', dataResults);
+
+module.exports.objectCreation = objectCreation;

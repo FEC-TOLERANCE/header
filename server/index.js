@@ -11,4 +11,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../react-client/dist'));
 
-app.get('/campaign/');
+app.get('/campaign', (req, res) => {
+  //take req.id and query my seeded db
+  //respond async with
+  res.json({testCampaign: 'test campaign connection'});
+});
+
+app.get('/pledge-options', (req, res) => {
+  res.json({testPledge: 'test pledge connection'});
+});
