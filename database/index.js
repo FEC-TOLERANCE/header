@@ -15,6 +15,7 @@ connection.once('open', () => {
 const { Schema } = mongoose;
 
 let headerSchema = {
+  identifier: Number,
   backing: {
     fundingGoal: Number,
     pledged: Number,
@@ -37,9 +38,28 @@ let headerSchema = {
 // console.log('data ', data.dataResults[0]);
 const MyModel = mongoose.model('headerData', new Schema (headerSchema));
 let SeedData = [];
-for (let i = 0; i < data.dataResults.length; i++) {
-  SeedData.push(new MyModel(data.dataResults).save());
+for (let i = 0; i < 5; i++) {
+  //return video promise and then get synchronous data object
+  // data.video()
+  // .then((videoData) => {
+  //   console.log('videoData', videoData);
+  //   new MyModel(data.dataResults);
+  //   console.log('MyModel', MyModel);
+  //   SeedData.push(data).save();
+  // })
+  // .catch((err) => {
+  //   console.log('err in video request from database', err);
+
+  // });
+  let generatedData = data.objectCreation(i);
+  // generatedData['_id'] = i;
+  let currentModel = new MyModel(generatedData);
+  // currentModel.update({identifier: {i}});
+  console.log('MyModel', currentModel);
+  // SeedData.push(current.save());
 }
+// console.log(SeedData);
+// Promise.all(SeedData);
 
 //iterate 100 times inputing data into an instance of mymodel
 //promimse all to save all instances

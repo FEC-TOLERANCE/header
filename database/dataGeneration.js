@@ -96,7 +96,7 @@ var description = (length) => {
 
 let videoArray = [];
 
-var video = (count) => {
+var video = () => {
   return axios.get('https://www.googleapis.com/youtube/v3/search', {
     params: {
       key: key.key,
@@ -112,7 +112,7 @@ var currency = () => {
 };
 
 let counter = 0;
-var objectCreation = () => {
+var objectCreation = (counter) => {
   // var fundingGoal = number(4 + randomUpTo(5), 0);
   var fundingGoal = randomUpTo(100000);
   var pledged = randomUpTo(100000);
@@ -129,29 +129,26 @@ var objectCreation = () => {
   var endDate = date(true);
 
   let generateData = () => {
-    return video()
-      .then((videoData) => {
-        console.log('videoData', videoData);
-        counter++;
-        var randomizedData = {
-          id: counter,
-          backing: {
-            fundingGoal: fundingGoal,
-            pledged: pledged,
-            backers: backers,
-            description: paragraph,
-            daysRemaining: days,
-            endDate: endDate,
-          },
-          header: {
-            title: header,
-            videoData: videoData,
-          }
-        };
-        return randomizedData;
-      });
-    return generateData();
+    // console.log('videoData', videoData);
+    var randomizedData = {
+      identifier: counter,
+      backing: {
+        fundingGoal: fundingGoal,
+        pledged: pledged,
+        backers: backers,
+        description: paragraph,
+        daysRemaining: days,
+        endDate: endDate,
+      },
+      header: {
+        title: header,
+        videoUrl: '',
+        thumbnail: ''
+      }
+    };
+    return randomizedData;
   };
+  return generateData();
 };
 
 // let dataResults = [];
@@ -161,3 +158,4 @@ var objectCreation = () => {
 // console.log('dataResults', dataResults);
 
 module.exports.objectCreation = objectCreation;
+module.exports.video = video;
