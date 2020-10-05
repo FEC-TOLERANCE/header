@@ -38,32 +38,34 @@ let headerSchema = {
 // console.log('data ', data.dataResults[0]);
 const MyModel = mongoose.model('headerData', new Schema (headerSchema));
 let SeedData = [];
-for (let i = 0; i < 5; i++) {
-  //return video promise and then get synchronous data object
-  // data.video()
-  // .then((videoData) => {
-  //   console.log('videoData', videoData);
-  //   new MyModel(data.dataResults);
-  //   console.log('MyModel', MyModel);
-  //   SeedData.push(data).save();
-  // })
-  // .catch((err) => {
-  //   console.log('err in video request from database', err);
+// for (let i = 0; i < 100; i++) {
+//   //return video promise and then get synchronous data object
+//   // data.video()
+//   // .then((videoData) => {
+//   //   console.log('videoData', videoData);
+//   //   new MyModel(data.dataResults);
+//   //   console.log('MyModel', MyModel);
+//   //   SeedData.push(data).save();
+//   // })
+//   // .catch((err) => {
+//   //   console.log('err in video request from database', err);
 
-  // });
-  let generatedData = data.objectCreation(i);
-  // generatedData['_id'] = i;
-  let currentModel = new MyModel(generatedData);
-  // currentModel.update({identifier: {i}});
-  console.log('MyModel', currentModel);
-  SeedData.push(current.save());
-}
-console.log(SeedData);
-Promise.all(SeedData);
+//   // });
+//   let generatedData = data.objectCreation(i);
+//   // generatedData['_id'] = i;
+//   let currentModel = new MyModel(generatedData);
+//   // currentModel.update({identifier: {i}});
+//   console.log('MyModel', currentModel);
+//   SeedData.push(currentModel.save());
+// }
+// console.log(SeedData);
+// Promise.all(SeedData);
 
 let getDbData = (id) => {
-  return db.headerData.find({identifier: id});
+  return MyModel.find({identifier: id});
 };
 
 
-module.exports.getCampaign = getCampaign;
+// module.exports.getCampaign = getCampaign;
+module.exports.getDbData = getDbData;
+module.exports.MyModel = MyModel;

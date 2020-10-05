@@ -11,13 +11,19 @@
     "mongo": "brew services start mongodb-community@4.4",
     "stop-mongo": "brew services stop mongodb-community@4.4",
     "seed": "nodemon ./database/index.js",
-    "build": "webpack --mode=development -d --watch"
+    "build": "webpack --mode=development -d --watch",
+    "start": "nodemon server/index.js",
+    "test": "jest"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.10.4",
     "axios": "^0.20.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "jest": "^26.4.2",
     "node": "^14.11.0",
+    "path": "^0.12.7",
     "react": "^16.13.1"
   },
   "devDependencies": {
@@ -25,6 +31,7 @@
     "@babel/preset-env": "^7.11.5",
     "babel-loader": "^8.1.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
-    "webpack": "^4.44.2"
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   }
 }
