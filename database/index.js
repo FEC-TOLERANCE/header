@@ -56,14 +56,14 @@ for (let i = 0; i < 5; i++) {
   let currentModel = new MyModel(generatedData);
   // currentModel.update({identifier: {i}});
   console.log('MyModel', currentModel);
-  // SeedData.push(current.save());
+  SeedData.push(current.save());
 }
-// console.log(SeedData);
-// Promise.all(SeedData);
+console.log(SeedData);
+Promise.all(SeedData);
 
-//iterate 100 times inputing data into an instance of mymodel
-//promimse all to save all instances
+let getDbData = (id) => {
+  return db.headerData.find({identifier: id});
+};
 
 
-
-
+module.exports.getCampaign = getCampaign;
