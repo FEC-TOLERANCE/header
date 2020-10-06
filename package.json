@@ -11,7 +11,7 @@
     "mongo": "brew services start mongodb-community@4.4",
     "stop-mongo": "brew services stop mongodb-community@4.4",
     "seed": "nodemon ./database/index.js",
-    "build": "webpack --mode=development -d --watch",
+    "build": "webpack -d --watch",
     "start": "nodemon server/index.js",
     "test": "jest"
   },

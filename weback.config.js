@@ -1,15 +1,22 @@
+
+
+
+
+
+
+
 let path = require('path');
 //bundle.js will be create by below file???
 module.exports = {
-  entry: './client/src/index.jsx',
+  entry: '/Users/jamesstockman/videoHeader/client/src/index.jsx',
   output: {
-    path: path.resolve(__dirname, 'client'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
   },
   modules: {
     rules: [{
       test: /\.jsx?$/,
-      exclude: '/node_modules/',
+      exclude: /node_modules/,
       use: {
         loader: 'babel-loader',
         options: {

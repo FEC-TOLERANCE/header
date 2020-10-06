@@ -12,15 +12,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/campaign', (req, res) => {
-  console.log('req', req);
-  id = req.params.id || 4;
+  //refactor to make dynamic logic
+  let search = req.url.slice(15, req.url.length);
+  console.log('search', search);
+  search = parseInt(search);
+  id = search || 4;
   if (typeof id !== 'number') {
-    res.error('invalid id, enter number');
+    res.err('invalid id, enter number');
   }
   db.getDbData(id)
     .then((data) => {
-      console.log('data from /campaign', data);
-      // console.log('results in /campaign', results);
+      console.log('data from /campaign', data[0].backing);
       res.json(data.backing);
     })
     .catch((err) => {
@@ -29,22 +31,24 @@ app.get('/campaign', (req, res) => {
     });
 });
 
-// app.get('/header', (req, res) => {
-//   id = req.id || 4;
-//   if (typeof id !== 'number') {
-//     res.error('invalid id, enter number');
-//   }
-//   db.getDbData(id)
-//     .then((data) => {
-//       console.log('data from /header', data);
-//       console.log('results in /header', results);
-//       res.json(data.header);
-//     })
-//     .catch((err) => {
-//       console.log('error in /pledge-options request', err);
-//       res.setStatus(500);
-//     });
-// });
+app.get('/header', (req, res) => {
+  let search = req.url.slice(15, req.url.length);
+  console.log('search', search);
+  search = parseInt(search);
+  id = req.id || 4;
+  if (typeof id !== 'number') {
+    res.error('invalid id, enter number');
+  }
+  db.getDbData(id)
+    .then((data) => {
+      console.log('data from /header', data[0].header);
+      res.json(data.header);
+    })
+    .catch((err) => {
+      console.log('error in /pledge-options request', err);
+      res.setStatus(500);
+    });
+});
 
 app.listen(PORT, () => {
   console.log('listening at port', PORT);
