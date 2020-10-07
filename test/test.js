@@ -27,25 +27,30 @@ afterAll(() => {
 })
 
 describe('API routing', () => {
-  const path = 'http://127.0.0.1:3004';
-  test('get campaign data based on id', async () => {
+  // const path = 'http://127.0.0.1:3004';
+  const path = "http://localhost:3004";
+  test('get campaign data by id', async () => {
+    // let request = await axios.get(`${path}/campaign/8`
     let request = await axios.get(`${path}/campaign`, {
-      id: 8
+      params: {
+        id: 8
+      }
     });
     expect(request.status).toBe(200);
-    expect(request.identifier).toEqual(8);
+    console.log('request in test', request);
+    expect(request.data.identifier).toEqual(8);
   });
 
-  test('should send 400 when wrong input used for campaign', () => {
-    const request = axios.get(`${path}/campaign`, {
-      id: 140
-    });
-    ((request())
-      .then((results) => {
-        expect((request.status).toBe(400));
-      })
-    );
-  });
+  // test('should send 400 when wrong input used for campaign', () => {
+  //   const request = axios.get(`${path}/campaign`, {
+  //     id: 140
+  //   });
+  //   ((request())
+  //     .then((results) => {
+  //       expect((request.status).toBe(400));
+  //     })
+  //   );
+  // });
 
   // test('get header data based on id', () => {
   //   const request = axios.get(`${path}/header`, {

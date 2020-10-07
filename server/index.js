@@ -12,14 +12,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/campaign', (req, res) => {
-  let id = parseInt(req.url.slice(15, req.url.length)) || 4;
+  // console.log('req data', req);
+  let id = parseInt(req.url.slice(13, req.url.length)) || 4;
   if (typeof id !== 'number') {
     res.err('invalid id, enter number');
   }
   db.getDbData(id)
     .then((data) => {
-      console.log('data from /campaign', data[0].backing);
-      res.json(data.backing);
+      console.log('data.id', data[0]);
+      let result = data[0].backing;
+      console.log('result', result);
+      result['identifier'] = data[0].identifier;
+      console.log('data from /campaign', result);
+      res.json(data[0]);
     })
     .catch((err) => {
       console.log('error in /campaign request', err);
@@ -28,14 +33,14 @@ app.get('/campaign', (req, res) => {
 });
 
 app.get('/header', (req, res) => {
-  let id = parseInt(req.url.slice(15, req.url.length)) || 4;
+  let id = parseInt(req.url.slice(11, req.url.length)) || 4;
   if (typeof id !== 'number') {
     res.error('invalid id, enter number');
   }
   db.getDbData(id)
     .then((data) => {
-      console.log('data from /header', data[0].header);
-      res.json(data.header);
+      console.log('data from /header', data[0]);
+      res.json(data[0]);
     })
     .catch((err) => {
       console.log('error in /pledge-options request', err);
@@ -43,6 +48,8 @@ app.get('/header', (req, res) => {
     });
 });
 
-// app.listen(PORT, () => {
-//   console.log('listening at port', PORT);
-// });
+if (process.env.JEST_WORKER_ID === undefined) {
+  app.listen(PORT, () => {
+    console.log('listening at port', PORT);
+  });
+}
