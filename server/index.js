@@ -12,11 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/campaign', (req, res) => {
-  //refactor to make dynamic logic
-  let search = req.url.slice(15, req.url.length);
-  console.log('search', search);
-  search = parseInt(search);
-  id = search || 4;
+  let id = parseInt(req.url.slice(15, req.url.length)) || 4;
   if (typeof id !== 'number') {
     res.err('invalid id, enter number');
   }
@@ -32,10 +28,7 @@ app.get('/campaign', (req, res) => {
 });
 
 app.get('/header', (req, res) => {
-  let search = req.url.slice(15, req.url.length);
-  console.log('search', search);
-  search = parseInt(search);
-  id = req.id || 4;
+  let id = parseInt(req.url.slice(15, req.url.length)) || 4;
   if (typeof id !== 'number') {
     res.error('invalid id, enter number');
   }
@@ -50,6 +43,6 @@ app.get('/header', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-  // console.log('listening at port', PORT);
-});
+// app.listen(PORT, () => {
+//   console.log('listening at port', PORT);
+// });

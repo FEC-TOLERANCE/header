@@ -1,19 +1,13 @@
-
-
-
-
-
-
-
 let path = require('path');
 //bundle.js will be create by below file???
+var SRC_DIR = path.join(__dirname, '/client/src');
 module.exports = {
-  entry: '/Users/jamesstockman/videoHeader/client/src/index.jsx',
+  entry: `${SRC_DIR}/index.jsx`,
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
   },
-  modules: {
+  module: {
     rules: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,

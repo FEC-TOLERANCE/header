@@ -13,17 +13,17 @@ const width = 1280;
 const height = 720;
 
 beforeAll(async () => {
-  broswer = await puppeteer.launch({
+  browser = await puppeteer.launch({
     headless:false,
     slowMo: 80,
     args: [`--window-size=${width},${height}`]
   });
-  page = await broswer.newPage();
+  page = await browser.newPage();
   await page.setViewport({width, height});
 });
 
 afterAll(() => {
-  broswer.close();
+  browser.close();
 })
 
 describe('API routing', () => {
@@ -32,20 +32,20 @@ describe('API routing', () => {
     let request = await axios.get(`${path}/campaign`, {
       id: 8
     });
-    expect((request.status).toEqual(200));
-    expect((request.identifier).toEqual(8));
+    expect(request.status).toBe(200);
+    expect(request.identifier).toEqual(8);
   });
 
-  // test('should send 400 when wrong input used for campaign', () => {
-  //   const request = axios.get(`${path}/campaign`, {
-  //     id: 140
-  //   });
-  //   ((request())
-  //     .then((results) => {
-  //       expect((request.status).toBe(400));
-  //     })
-  //   );
-  // });
+  test('should send 400 when wrong input used for campaign', () => {
+    const request = axios.get(`${path}/campaign`, {
+      id: 140
+    });
+    ((request())
+      .then((results) => {
+        expect((request.status).toBe(400));
+      })
+    );
+  });
 
   // test('get header data based on id', () => {
   //   const request = axios.get(`${path}/header`, {

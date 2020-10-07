@@ -63,14 +63,14 @@ module.exports.MyModel = MyModel;
 
 
 //return video promise and then get synchronous data object
-  // data.video()
-  // .then((videoData) => {
-  //   console.log('videoData', videoData);
-  //   new MyModel(data.dataResults);
-  //   console.log('MyModel', MyModel);
-  //   SeedData.push(data).save();
-  // })
-  // .catch((err) => {
-  //   console.log('err in video request from database', err);
+// data.video()
+// .then((videoData) => {
+//   console.log('videoData', videoData);
+//   new MyModel(data.dataResults);
+//   console.log('MyModel', MyModel);
+//   SeedData.push(data).save();
+// })
+// .catch((err) => {
+//   console.log('err in video request from database', err);
 
-  // });
+// });
