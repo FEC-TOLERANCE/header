@@ -11,25 +11,39 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.get('/campaign', (req, res) => {
+app.get('/campaign/:id', (req, res) => {
+  //handle parameters differently
   // console.log('req data', req);
-  let id = parseInt(req.url.slice(13, req.url.length)) || 4;
+  // let id = parseInt(req.url.slice(13, req.url.length)) || 4;
+  let id = parseInt(req.params.id);
+  console.log('id', id);
   if (typeof id !== 'number') {
-    res.err('invalid id, enter number');
+    res.status(400).send('invalid id, enter number');
+  } else {
+    db.getDbData(id)
+      .then((data) => {
+        if (data.length === 0) {
+          res.status(400).json({
+            success: false,
+            message: 'invalid id parameter'
+          });
+          // throw new Error('incorrect id');
+        } else {
+          // console.log('send data to client', data[0]);
+          res.json(data[0]);
+        }
+        // console.log('data.id', data[0]);
+        // let result = data[0].backing;
+        // console.log('result', result);
+        // result['identifier'] = data[0].identifier;
+        // console.log('data from /campaign', result);
+      })
+      .catch((err) => {
+        console.log('error in /campaign request', err);
+        res.setStatus(500);
+      });
   }
-  db.getDbData(id)
-    .then((data) => {
-      console.log('data.id', data[0]);
-      let result = data[0].backing;
-      console.log('result', result);
-      result['identifier'] = data[0].identifier;
-      console.log('data from /campaign', result);
-      res.json(data[0]);
-    })
-    .catch((err) => {
-      console.log('error in /campaign request', err);
-      res.setStatus(500);
-    });
+
 });
 
 app.get('/header', (req, res) => {
@@ -39,7 +53,7 @@ app.get('/header', (req, res) => {
   }
   db.getDbData(id)
     .then((data) => {
-      console.log('data from /header', data[0]);
+      // console.log('data from /header', data[0]);
       res.json(data[0]);
     })
     .catch((err) => {

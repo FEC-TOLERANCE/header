@@ -12,21 +12,22 @@ let browser;
 const width = 1280;
 const height = 720;
 
-beforeAll(async () => {
-  browser = await puppeteer.launch({
-    headless:false,
-    slowMo: 80,
-    args: [`--window-size=${width},${height}`]
-  });
-  page = await browser.newPage();
-  await page.setViewport({width, height});
-});
+// beforeAll(async () => {
+//   browser = await puppeteer.launch({
+//     headless:false,
+//     slowMo: 80,
+//     args: [`--window-size=${width},${height}`]
+//   });
+//   page = await browser.newPage();
+//   await page.setViewport({width, height});
+// });
 
-afterAll(() => {
-  browser.close();
-})
+// afterAll(() => {
+//   console.log('browser', browser);
+//   browser.close();
+// })
 
-describe('API routing', () => {
+// describe('API routing', () => {
   // const path = 'http://127.0.0.1:3004';
   const path = "http://localhost:3004";
   test('get campaign data by id', async () => {
@@ -36,21 +37,13 @@ describe('API routing', () => {
         id: 8
       }
     });
+    console.log('request', request);
     expect(request.status).toBe(200);
-    console.log('request in test', request);
+    // console.log('request in test', request);
     expect(request.data.identifier).toEqual(8);
   });
 
-  // test('should send 400 when wrong input used for campaign', () => {
-  //   const request = axios.get(`${path}/campaign`, {
-  //     id: 140
-  //   });
-  //   ((request())
-  //     .then((results) => {
-  //       expect((request.status).toBe(400));
-  //     })
-  //   );
-  // });
+
 
   // test('get header data based on id', () => {
   //   const request = axios.get(`${path}/header`, {
@@ -74,6 +67,20 @@ describe('API routing', () => {
   //     })
   //   );
   // });
+// });
+test('should set status to 400 when wrong input used for campaign', async () => {
+  const request = await axios.get(`${path}/campaign`, {
+    params: {
+      id: 10000
+    }
+  });
+    console.log('request in test', request.data);
+    expect (request.status).toEqual(400)
+    // expect(request.data.success).toEqual(false);
+    // expect(() => {
+    //   request();
+    // }.catch(e)
+    // }.toThrow('incorrect id');
 });
 
 // BELOW IS USING PROMISES NOT ASYNC AWAIT
