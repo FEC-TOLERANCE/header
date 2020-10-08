@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('../database/index.js');
-// var dbIndex = require('../database-mysql/index.js');
 const app = express();
 const PORT = 3004;
 
@@ -12,9 +11,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/campaign/:id', (req, res) => {
-  //handle parameters differently
-  // console.log('req data', req);
-  // let id = parseInt(req.url.slice(13, req.url.length)) || 4;
   let id = parseInt(req.params.id);
   console.log('id', id);
   if (typeof id !== 'number') {
@@ -34,7 +30,6 @@ app.get('/campaign/:id', (req, res) => {
         res.setStatus(500);
       });
   }
-
 });
 
 app.get('/header/:id', (req, res) => {
@@ -45,7 +40,6 @@ app.get('/header/:id', (req, res) => {
   }
   db.getDbData(id)
     .then((data) => {
-      // console.log('data from /header', data[0]);
       res.json(data[0]);
     })
     .catch((err) => {

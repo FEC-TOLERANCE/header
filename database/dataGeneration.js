@@ -2,14 +2,6 @@ let axios = require('axios');
 var randomUpTo = (num) => {
   let numStr = Math.floor(Math.random() * Math.floor(num));
   let strNoCommas = '';
-  // console.log('numStr', numStr);
-  // for (let i = 0; i < numStr.length; i++) {
-  //   if (numStr[i] !== ',') {
-  //     strNoCommas += numStr[i];
-  //   }
-  // }
-  // let number = strNoCommas;
-  // console.log('number', number);
   return numStr;
 };
 let key = require('../config.js');
@@ -43,7 +35,6 @@ var number = (length, decimals) => {
 };
 
 var names = (count) => {
-  //need to input first name and last name list
   var results = [];
   for (var i = 0; i < count; i++) {
     var name = '';
@@ -57,7 +48,8 @@ var names = (count) => {
 
 var title = (length) => {
   var results = '';
-  var titleList = ['here', 'is', 'a', 'list', 'of', 'titles'];
+  var titleList = 'The juxtaposition of images in the news of farmers destroying crops and dumping milk with empty supermarket shelves or hungry Americans lining up for hours at food banks tells a story of economic efficiency gone mad. Today the US actually has two separate food chains, each supplying roughly half of the market. The retail food chain links one set of farmers to grocery stores, and a second chain links a different set of farmers to institutional purchasers of food, such as restaurants, schools, and corporate offices. With the shutting down of much of the economy, as Americans stay home, this second food chain has essentially collapsed. But because of the way the industry has developed over the past several decades, it’s virtually impossible to reroute food normally sold in bulk to institutions to the retail outlets now clamoring for it. There’s still plenty of food coming from American farms, but no easy way to get it where it’s needed.';
+  titleList = titleList.split(' ');
   for (var i = 0; i < length; i++) {
     results += titleList[(Math.floor(Math.random() * Math.floor(titleList.length)))];
     results += ' ';
@@ -67,7 +59,8 @@ var title = (length) => {
 
 var description = (length) => {
   var results = '';
-  var descriptionList = ['this', 'is', 'random', 'words'];
+  var descriptionList = 'The juxtaposition of images in the news of farmers destroying crops and dumping milk with empty supermarket shelves or hungry Americans lining up for hours at food banks tells a story of economic efficiency gone mad. Today the US actually has two separate food chains, each supplying roughly half of the market. The retail food chain links one set of farmers to grocery stores, and a second chain links a different set of farmers to institutional purchasers of food, such as restaurants, schools, and corporate offices. With the shutting down of much of the economy, as Americans stay home, this second food chain has essentially collapsed. But because of the way the industry has developed over the past several decades, it’s virtually impossible to reroute food normally sold in bulk to institutions to the retail outlets now clamoring for it. There’s still plenty of food coming from American farms, but no easy way to get it where it’s needed.';
+  descriptionList = descriptionList.split(' ');
   for (var i = 0; i < length; i++) {
     if ((Math.floor(Math.random() * Math.floor(15))) === 5) {
       results += '.';
@@ -145,8 +138,8 @@ var objectCreation = (counter) => {
       },
       header: {
         title: header,
-        // videoUrl: 'https://www.youtube.com/watch?v=fBYvHHT8fdE',
-        // thumbnail: videoData.snippet.thumbnail
+        videoUrl: 'https://www.youtube.com/watch?v=fBYvHHT8fdE',
+        thumbnail: 'thumbnail'
       }
     };
     return randomizedData;

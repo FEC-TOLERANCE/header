@@ -38,7 +38,7 @@ let headerSchema = {
 // console.log('data ', data.dataResults[0]);
 const MyModel = mongoose.model('headerData', new Schema (headerSchema));
 let SeedData = [];
-for (let i = 0; i <= 3; i++) {
+for (let i = 0; i < 100; i++) {
   let generatedData = data.objectCreation(i);
   // console.log('generatedData', generatedData);
   // generatedData['_id'] = i;
