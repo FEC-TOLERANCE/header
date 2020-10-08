@@ -129,6 +129,9 @@ var objectCreation = (counter) => {
   var endDate = date(true);
 
   let generateData = () => {
+
+    // video()
+    // .then((videoData) => {
     // console.log('videoData', videoData);
     var randomizedData = {
       identifier: counter,
@@ -142,11 +145,17 @@ var objectCreation = (counter) => {
       },
       header: {
         title: header,
-        videoUrl: '',
-        thumbnail: ''
+        // videoUrl: 'https://www.youtube.com/watch?v=fBYvHHT8fdE',
+        // thumbnail: videoData.snippet.thumbnail
       }
     };
     return randomizedData;
+  //     })
+  //     .catch((err) => {
+  //       console.log('err in dataGeneration', err);
+  //       res.status(400);
+    // });
+  // };
   };
   return generateData();
 };
@@ -158,4 +167,4 @@ var objectCreation = (counter) => {
 // console.log('dataResults', dataResults);
 
 module.exports.objectCreation = objectCreation;
-module.exports.video = video;
+// module.exports.video = video;

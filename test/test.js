@@ -27,110 +27,33 @@ const height = 720;
 //   browser.close();
 // })
 
-// describe('API routing', () => {
+describe('API routing', () => {
   // const path = 'http://127.0.0.1:3004';
   const path = "http://localhost:3004";
   test('get campaign data by id', async () => {
-    // let request = await axios.get(`${path}/campaign/8`
-    let request = await axios.get(`${path}/campaign`, {
-      params: {
-        id: 8
-      }
-    });
-    console.log('request', request);
+    let request = await axios.get(`${path}/campaign/8`)
     expect(request.status).toBe(200);
-    // console.log('request in test', request);
     expect(request.data.identifier).toEqual(8);
   });
-
-
-
-  // test('get header data based on id', () => {
-  //   const request = axios.get(`${path}/header`, {
-  //     id: 8
-  //   });
-  //   ((request())
-  //     .then((results) => {
-  //       expect((request.status).toBe(200));
-  //       expect((request.identifier).toBe(8));
-  //     })
-  //   );
-  // });
-
-  // test('should send 400 when wrong input used for header', () => {
-  //   const request = axios.get(`${path}/campaign`, {
-  //     id: 140
-  //   });
-  //   ((request())
-  //     .then((results) => {
-  //       expect((request.status).toBe(400));
-  //     })
-  //   );
-  // });
-// });
-test('should set status to 400 when wrong input used for campaign', async () => {
-  const request = await axios.get(`${path}/campaign`, {
-    params: {
-      id: 10000
-    }
+  test('should set status to 400 when wrong input used for campaign', () => {
+    axios.get(`${path}/campaign/800`)
+      .then((data) => {
+        console.log('data', data);
+        expect(data.status).toEqual(400);
+      })
   });
-    console.log('request in test', request.data);
-    expect (request.status).toEqual(400)
-    // expect(request.data.success).toEqual(false);
-    // expect(() => {
-    //   request();
-    // }.catch(e)
-    // }.toThrow('incorrect id');
+  test('get header data based on id', () => {
+    axios.get(`${path}/header/8`)
+      .then((data) => {
+        expect(data.status).toBe(200);
+        expect(data.identifier).toBe(8);
+      })
+  });
+
+  test('should send 400 when wrong input used for header', () => {
+    axios.get(`${path}/campaign/800`)
+      .then((data) => {
+        expect((data.status).toBe(400));
+      })
+  });
 });
-
-// BELOW IS USING PROMISES NOT ASYNC AWAIT
-
-// describe('API routing', () => {
-//   const path = 'http://127.0.0.1:3005';
-//   test('get campaign data based on id', () => {
-//     const request = axios.get(`${path}/campaign`, {
-//       id: 8
-//     });
-//     ((request())
-//       .then((results) => {
-//         expect((request.status).toBe(200));
-//         expect((request.identifier).toBe(8));
-//       })
-//     );
-//   });
-
-//   test('should send 400 when wrong input used for campaign', () => {
-//     const request = axios.get(`${path}/campaign`, {
-//       id: 140
-//     });
-//     ((request())
-//       .then((results) => {
-//         expect((request.status).toBe(400));
-//       })
-//     );
-//   });
-
-//   test('get header data based on id', () => {
-//     const request = axios.get(`${path}/header`, {
-//       id: 8
-//     });
-//     ((request())
-//       .then((results) => {
-//         expect((request.status).toBe(200));
-//         expect((request.identifier).toBe(8));
-//       })
-//     );
-//   });
-
-//   test('should send 400 when wrong input used for header', () => {
-//     const request = axios.get(`${path}/campaign`, {
-//       id: 140
-//     });
-//     ((request())
-//       .then((results) => {
-//         expect((request.status).toBe(400));
-//       })
-//     );
-//   });
-// });
-

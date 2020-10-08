@@ -38,18 +38,18 @@ let headerSchema = {
 // console.log('data ', data.dataResults[0]);
 const MyModel = mongoose.model('headerData', new Schema (headerSchema));
 let SeedData = [];
-// for (let i = 0; i <= 100; i++) {
-//   let generatedData = data.objectCreation(i);
-//   console.log('generatedData', generatedData);
-//   // generatedData['_id'] = i;
-//   let currentModel = new MyModel(generatedData);
-//   // currentModel.update({identifier: {i}});
-//   console.log('MyModel', currentModel);
-//   SeedData.push(currentModel.save());
-//   // SeedData.push(currentModel.update({upsert: true}));
-// }
-// console.log('seedData length', SeedData.length);
-// Promise.all(SeedData);
+for (let i = 0; i <= 3; i++) {
+  let generatedData = data.objectCreation(i);
+  // console.log('generatedData', generatedData);
+  // generatedData['_id'] = i;
+  let currentModel = new MyModel(generatedData);
+  // currentModel.update({identifier: {i}});
+  // console.log('MyModel', currentModel);
+  SeedData.push(currentModel.save());
+  // SeedData.push(currentModel.update({upsert: true}));
+}
+// console.log('seedData length', SeedData.length);d
+Promise.all(SeedData);
 
 let getDbData = (id) => {
   return MyModel.find({identifier: id});

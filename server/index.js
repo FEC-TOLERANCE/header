@@ -19,24 +19,15 @@ app.get('/campaign/:id', (req, res) => {
   console.log('id', id);
   if (typeof id !== 'number') {
     res.status(400).send('invalid id, enter number');
+  } else if (id > 100) {
+    res.status(400).json({
+      success: false,
+      message: 'invalid id parameter'
+    });
   } else {
     db.getDbData(id)
       .then((data) => {
-        if (data.length === 0) {
-          res.status(400).json({
-            success: false,
-            message: 'invalid id parameter'
-          });
-          // throw new Error('incorrect id');
-        } else {
-          // console.log('send data to client', data[0]);
-          res.json(data[0]);
-        }
-        // console.log('data.id', data[0]);
-        // let result = data[0].backing;
-        // console.log('result', result);
-        // result['identifier'] = data[0].identifier;
-        // console.log('data from /campaign', result);
+        res.json(data[0]);
       })
       .catch((err) => {
         console.log('error in /campaign request', err);
@@ -46,8 +37,9 @@ app.get('/campaign/:id', (req, res) => {
 
 });
 
-app.get('/header', (req, res) => {
-  let id = parseInt(req.url.slice(11, req.url.length)) || 4;
+app.get('/header/:id', (req, res) => {
+  let id = parseInt(req.params.id);
+  console.log('id', id);
   if (typeof id !== 'number') {
     res.error('invalid id, enter number');
   }
