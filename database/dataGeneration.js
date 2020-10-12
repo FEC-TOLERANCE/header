@@ -1,85 +1,87 @@
-let axios = require('axios');
-var randomUpTo = (num) => {
-  let numStr = Math.floor(Math.random() * Math.floor(num));
+const axios = require('axios');
+const key = require('../config.js');
+
+let randomUpTo = (num) => {
+  let numStr = Math.floor(Math.random() * (num));
   let strNoCommas = '';
   return numStr;
 };
-let key = require('../config.js');
 
-var date = (future) => {
+
+let date = (future) => {
   if (future) {
-    var month = Math.floor(Math.random() * Math.floor(12));
-    var day = Math.floor(Math.random() * Math.floor(31));
-    var year = '202' + Math.floor(Math.random() * Math.floor(8) + 1);
+    let month = Math.floor(Math.random() * (12));
+    let day = Math.floor(Math.random() * (31));
+    let year = '202' + Math.floor(Math.random() * (8) + 1);
     return month + '.' + day + '.' + year;
   } else {
-    var month = Math.floor(Math.random() * Math.floor(12));
-    var day = Math.floor(Math.random() * Math.floor(31));
-    var year = '201' + Math.floor(Math.random() * Math.floor(9));
+    let month = Math.floor(Math.random() * (12));
+    let day = Math.floor(Math.random() * (31));
+    let year = '201' + Math.floor(Math.random() * (9));
     return month + '.' + day + '.' + year;
   }
 };
 
-var number = (length, decimals) => {
-  var value = [];
-  var afterDecimal = [];
-  for (var i = 0; i < length; i++) {
-    value.push(Math.floor(Math.random() * Math.floor(9)));
+let number = (length, decimals) => {
+  let value = [];
+  let afterDecimal = [];
+  for (let i = 0; i < length; i++) {
+    value.push(Math.floor(Math.random() * (9)));
   }
-  for (var j = 0; j < decimals; j++) {
-    afterDecimal.push(Math.floor(Math.random() * Math.floor(9)));
+  for (let j = 0; j < decimals; j++) {
+    afterDecimal.push(Math.floor(Math.random() * (9)));
   }
   afterDecimal = afterDecimal.join();
   value = value.join();
   return value;
 };
 
-var names = (count) => {
-  var results = [];
-  for (var i = 0; i < count; i++) {
-    var name = '';
-    name += (firstNameList[(Math.floor(Math.random() * Math.floor(firstNameList.length)))]);
+let names = (count) => {
+  let results = [];
+  for (let i = 0; i < count; i++) {
+    let name = '';
+    name += (firstNameList[(Math.floor(Math.random() * (firstNameList.length)))]);
     name += ' ';
-    name += (lastNameList[(Math.floor(Math.random() * Math.floor(lastNameList.length)))]);
+    name += (lastNameList[(Math.floor(Math.random() * (lastNameList.length)))]);
     results.push(name);
   }
   return results.join();
 };
 
-var title = (length) => {
-  var results = '';
-  var titleList = 'The juxtaposition of images in the news of farmers destroying crops and dumping milk with empty supermarket shelves or hungry Americans lining up for hours at food banks tells a story of economic efficiency gone mad. Today the US actually has two separate food chains, each supplying roughly half of the market. The retail food chain links one set of farmers to grocery stores, and a second chain links a different set of farmers to institutional purchasers of food, such as restaurants, schools, and corporate offices. With the shutting down of much of the economy, as Americans stay home, this second food chain has essentially collapsed. But because of the way the industry has developed over the past several decades, it’s virtually impossible to reroute food normally sold in bulk to institutions to the retail outlets now clamoring for it. There’s still plenty of food coming from American farms, but no easy way to get it where it’s needed.';
+let title = (length) => {
+  let results = '';
+  let titleList = 'The juxtaposition of images in the news of farmers destroying crops and dumping milk with empty supermarket shelves or hungry Americans lining up for hours at food banks tells a story of economic efficiency gone mad. Today the US actually has two separate food chains, each supplying roughly half of the market. The retail food chain links one set of farmers to grocery stores, and a second chain links a different set of farmers to institutional purchasers of food, such as restaurants, schools, and corporate offices. With the shutting down of much of the economy, as Americans stay home, this second food chain has essentially collapsed. But because of the way the industry has developed over the past several decades, it’s virtually impossible to reroute food normally sold in bulk to institutions to the retail outlets now clamoring for it. There’s still plenty of food coming from American farms, but no easy way to get it where it’s needed.';
   titleList = titleList.split(' ');
-  for (var i = 0; i < length; i++) {
-    results += titleList[(Math.floor(Math.random() * Math.floor(titleList.length)))];
+  for (let i = 0; i < length; i++) {
+    results += titleList[(Math.floor(Math.random() * (titleList.length)))];
     results += ' ';
   }
   return results;
 };
 
-var description = (length) => {
-  var results = '';
-  var descriptionList = 'The juxtaposition of images in the news of farmers destroying crops and dumping milk with empty supermarket shelves or hungry Americans lining up for hours at food banks tells a story of economic efficiency gone mad. Today the US actually has two separate food chains, each supplying roughly half of the market. The retail food chain links one set of farmers to grocery stores, and a second chain links a different set of farmers to institutional purchasers of food, such as restaurants, schools, and corporate offices. With the shutting down of much of the economy, as Americans stay home, this second food chain has essentially collapsed. But because of the way the industry has developed over the past several decades, it’s virtually impossible to reroute food normally sold in bulk to institutions to the retail outlets now clamoring for it. There’s still plenty of food coming from American farms, but no easy way to get it where it’s needed.';
+let description = (length) => {
+  let results = '';
+  let descriptionList = 'The juxtaposition of images in the news of farmers destroying crops and dumping milk with empty supermarket shelves or hungry Americans lining up for hours at food banks tells a story of economic efficiency gone mad. Today the US actually has two separate food chains, each supplying roughly half of the market. The retail food chain links one set of farmers to grocery stores, and a second chain links a different set of farmers to institutional purchasers of food, such as restaurants, schools, and corporate offices. With the shutting down of much of the economy, as Americans stay home, this second food chain has essentially collapsed. But because of the way the industry has developed over the past several decades, it’s virtually impossible to reroute food normally sold in bulk to institutions to the retail outlets now clamoring for it. There’s still plenty of food coming from American farms, but no easy way to get it where it’s needed.';
   descriptionList = descriptionList.split(' ');
-  for (var i = 0; i < length; i++) {
-    if ((Math.floor(Math.random() * Math.floor(15))) === 5) {
+  for (let i = 0; i < length; i++) {
+    if ((Math.floor(Math.random() * (15))) === 5) {
       results += '.';
-    } else if ((Math.floor(Math.random() * Math.floor(25))) === 5) {
+    } else if ((Math.floor(Math.random() * (25))) === 5) {
       results += ',';
-    } else if ((Math.floor(Math.random() * Math.floor(40))) === 5) {
+    } else if ((Math.floor(Math.random() * (40))) === 5) {
       results += '?';
-    } else if ((Math.floor(Math.random() * Math.floor(200))) === 5) {
+    } else if ((Math.floor(Math.random() * (200))) === 5) {
       results += '/n';
     } else if (results[i - 4] === '/' && results[i - 3] ==='n') {
-      results += '   ' + descriptionList[(Math.floor(Math.random() * Math.floor(descriptionList.length)))].toUpperCase();
+      results += '   ' + descriptionList[(Math.floor(Math.random() * (descriptionList.length)))].toUpperCase();
     } else if (results[i - 1] === '.' || results[i - 1] === '?') {
-      results += ' ' + descriptionList[(Math.floor(Math.random() * Math.floor(descriptionList.length)))].toUpperCase();
+      results += ' ' + descriptionList[(Math.floor(Math.random() * (descriptionList.length)))].toUpperCase();
     } else {
-      results += ' ' + descriptionList[(Math.floor(Math.random() * Math.floor(descriptionList.length)))].toLowerCase();
+      results += ' ' + descriptionList[(Math.floor(Math.random() * (descriptionList.length)))].toLowerCase();
     }
   }
   if (results[results.length - 1] === ',') {
-    results += descriptionList[(Math.floor(Math.random() * Math.floor(descriptionList.length)))].toLowerCase() + '.';
+    results += descriptionList[(Math.floor(Math.random() * (descriptionList.length)))].toLowerCase() + '.';
   } else if (results[results.length - 1] === '.' || results[results.length - 1] === '?') {
     return results;
   } else {
@@ -89,48 +91,38 @@ var description = (length) => {
 
 let videoArray = [];
 
-var video = () => {
+let video = () => {
   return axios.get('https://www.googleapis.com/youtube/v3/search', {
     params: {
       key: key.key,
       maxResults: 1,
       q: 'dogs',
     }
+      .then((data) => {
+        videoArray = data;
+      })
+      .catch((err) => {
+        throw new Error(err);
+      })
   });
 };
 
-var currency = () => {
-  var currencyOptions = ['USD', 'EUR', 'AUD', 'GBP', 'JPY', 'CHF', 'AFN', 'ALL'];
-  return currencyOptions[(Math.floor(Math.random() * Math.floor(currencyOptions.length)))];
-};
-
-let counter = 0;
-var objectCreation = (counter) => {
-  // var fundingGoal = number(4 + randomUpTo(5), 0);
-  var fundingGoal = randomUpTo(100000);
-  var pledged = randomUpTo(100000);
-  // if (randomUpTo(5) === 4) {
-  //   pledged = randomUpTo(10) * fundingGoal;
-  // } else {
-  //   pledged = Math.random() * fundingGoal;
-  // }
-  var backers = randomUpTo(50000);
-  var days = randomUpTo(200);
-  var headline = description(randomUpTo(40));
-  var header = title(randomUpTo(7));
-  var paragraph = description(randomUpTo(500));
-  var endDate = date(true);
+let objectCreation = (counter) => {
+  let fundingGoal = randomUpTo(100000);
+  let pledged = randomUpTo(100000);
+  let backers = randomUpTo(50000);
+  let days = randomUpTo(200);
+  let headline = description(randomUpTo(40));
+  let header = title(randomUpTo(7));
+  let paragraph = description(randomUpTo(500));
+  let endDate = date(true);
 
   let generateData = () => {
-
-    // video()
-    // .then((videoData) => {
-    // console.log('videoData', videoData);
-    var randomizedData = {
+    let randomizedData = {
       identifier: counter,
       backing: {
         fundingGoal: fundingGoal,
-        pledged: pledged,
+        amountFunded: pledged,
         backers: backers,
         description: paragraph,
         daysRemaining: days,
@@ -143,21 +135,8 @@ var objectCreation = (counter) => {
       }
     };
     return randomizedData;
-  //     })
-  //     .catch((err) => {
-  //       console.log('err in dataGeneration', err);
-  //       res.status(400);
-    // });
-  // };
   };
   return generateData();
 };
 
-// let dataResults = [];
-// for (let i = 0; i < 3; i++) {
-//   dataResults.push(objectCreation());
-// }
-// console.log('dataResults', dataResults);
-
 module.exports.objectCreation = objectCreation;
-// module.exports.video = video;

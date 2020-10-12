@@ -12,7 +12,6 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/campaign/:id', (req, res) => {
   let id = parseInt(req.params.id);
-  console.log('id', id);
   if (typeof id !== 'number') {
     res.status(400).send('invalid id, enter number');
   } else if (id > 100) {
@@ -23,28 +22,29 @@ app.get('/campaign/:id', (req, res) => {
   } else {
     db.getDbData(id)
       .then((data) => {
+        res.status(200);
         res.json(data[0]);
       })
       .catch((err) => {
-        console.log('error in /campaign request', err);
         res.setStatus(500);
+        throw new Error(err);
       });
   }
 });
 
 app.get('/header/:id', (req, res) => {
   let id = parseInt(req.params.id);
-  console.log('id', id);
   if (typeof id !== 'number') {
-    res.error('invalid id, enter number');
+    res.status(400).send('invalid id, enter number');
   }
   db.getDbData(id)
     .then((data) => {
+      res.status(200);
       res.json(data[0]);
     })
     .catch((err) => {
-      console.log('error in /pledge-options request', err);
       res.setStatus(500);
+      throw new Error(err);
     });
 });
 

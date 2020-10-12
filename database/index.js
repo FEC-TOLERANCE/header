@@ -2,7 +2,6 @@
 let mongoose = require('mongoose');
 let data = require('./dataGeneration.js');
 
-
 const db = mongoose.connect('mongodb://localhost/videoHeader', {useNewUrlParser: true, useUnifiedTopology: true})
   .catch(error => handleError(error));
 const connection = mongoose.connection;
@@ -18,7 +17,7 @@ let headerSchema = {
   identifier: Number,
   backing: {
     fundingGoal: Number,
-    pledged: Number,
+    amountFunded: Number,
     backers: Number,
     daysRemaining: Number,
     fundingStatus: {
@@ -35,42 +34,21 @@ let headerSchema = {
   }
 };
 
-// console.log('data ', data.dataResults[0]);
-const MyModel = mongoose.model('headerData', new Schema (headerSchema));
+const HeaderModel = mongoose.model('headerData', new Schema (headerSchema));
 let SeedData = [];
 for (let i = 0; i < 100; i++) {
   let generatedData = data.objectCreation(i);
-  // console.log('generatedData', generatedData);
-  // generatedData['_id'] = i;
-  let currentModel = new MyModel(generatedData);
-  // currentModel.update({identifier: {i}});
-  // console.log('MyModel', currentModel);
+  let currentModel = new HeaderModel(generatedData);
   SeedData.push(currentModel.save());
+  // .catch((err) => {
+  //   throw new Error(err);
+  // });
   // SeedData.push(currentModel.update({upsert: true}));
 }
-// console.log('seedData length', SeedData.length);d
 Promise.all(SeedData);
 
 let getDbData = (id) => {
-  return MyModel.find({identifier: id});
+  return HeaderModel.find({identifier: id});
 };
 
-
-// module.exports.getCampaign = getCampaign;
-module.exports.getDbData = getDbData;
-module.exports.MyModel = MyModel;
-
-
-
-//return video promise and then get synchronous data object
-// data.video()
-// .then((videoData) => {
-//   console.log('videoData', videoData);
-//   new MyModel(data.dataResults);
-//   console.log('MyModel', MyModel);
-//   SeedData.push(data).save();
-// })
-// .catch((err) => {
-//   console.log('err in video request from database', err);
-
-// });
+module.exports = {getDbData, HeaderModel};
