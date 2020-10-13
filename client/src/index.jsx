@@ -14,7 +14,7 @@ class App extends React.Component {
 
   getItemId() {
     //query url to find id
-    this.setState(ItemId: );
+    this.setState('itemId': id);
   }
 
   componentDidMount() {

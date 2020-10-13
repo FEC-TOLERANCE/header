@@ -5,26 +5,27 @@ const axios = require('axios');
 
 describe('API routing', () => {
   const path = 'http://localhost:3004';
-  test('get campaign data by id', () => {
-    axios.get(`${path}/campaign/8`)
+  test('get funding data by id', () => {
+    axios.get(`${path}/funding/8`)
       .then((data) => {
         expect(data.status).toBe(200);
         expect(data.identifier).toEqual(8);
         expect(data.header.title).toEqual('efficiency news to the ');
       })
       .catch((err) => {
-        console.log('err in campaign test', err);
+        console.log('err in funding test', err);
       });
   });
-  test('should set status to 400 when wrong input used for campaign', () => {
-    axios.get(`${path}/campaign/800`)
+  test('should set status to 400 when wrong input used for funding', () => {
+    axios.get(`${path}/funding/800`)
       .then((data) => {
         expect(data.status).toEqual(400);
       })
       .catch((err) => {
-        console.log('err in error campaing test', err);
+        console.log('err in error funding test', err);
       });
   });
+
   test('get header data based on id', () => {
     axios.get(`${path}/header/9`)
       .then((data) => {
@@ -37,7 +38,7 @@ describe('API routing', () => {
   });
 
   test('should send 400 when wrong input used for header', () => {
-    axios.get(`${path}/campaign/800`)
+    axios.get(`${path}/header/800`)
       .then((data) => {
         expect((data.status).toEqual(400));
       })

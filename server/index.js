@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.get('/campaign/:id', (req, res) => {
+app.get('/funding:id', (req, res) => {
   let id = parseInt(req.params.id);
   if (typeof id !== 'number') {
     res.status(400).send('invalid id, enter number');
