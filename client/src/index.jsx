@@ -7,19 +7,28 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      itemId: 1
+      itemId: 1,
+      fundingGoal: 0
     };
-    this.getItemId = this.getItemId.bind(this);
+    // this.getItemId = this.getItemId.bind(this);
   }
 
-  getItemId() {
-    //query url to find id
-    this.setState('itemId': id);
-  }
+  // getItemId() {
+  //   let splitComponentUrl = window.location.href.split('/');
+  //   console.log('split component', splitComponentUrl);
+  //   let urlWithId = splitComponentUrl[0] + '//' + splitComponentUrl[2] + '/funding/' + splitComponentUrl[3];
+  //   axios.get(urlWithId)
+  //     .then((fundingData) => {
+  //       this.setState({'itemId': fundingData.identifier});
+  //     })
+  //     .catch((err) => {
+  //       throw new Error(err);
+  //     });
+  // }
 
-  componentDidMount() {
-    this.getItemId();
-  }
+  // componentDidMount() {
+  //   // this.getItemId();
+  // }
 
 
   render() {
@@ -28,12 +37,12 @@ class App extends React.Component {
         <div className="panel">
           <h1>Kickstarter Header</h1>
           <nav className="nav">
-            <span>
-              Funding Goal
-            </span>
-            <span>
+            <div>
+              {/* Funding Goal {this.state.fundingGoal} */}
+            </div>
+            <div>
               Amount Funded
-            </span>
+            </div>
           </nav>
           <div/>
         </div>

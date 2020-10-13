@@ -36,16 +36,16 @@ let headerSchema = {
 
 const HeaderModel = mongoose.model('headerData', new Schema (headerSchema));
 let SeedData = [];
-for (let i = 0; i < 100; i++) {
-  let generatedData = data.objectCreation(i);
-  let currentModel = new HeaderModel(generatedData);
-  SeedData.push(currentModel.save());
-  // .catch((err) => {
-  //   throw new Error(err);
-  // });
-  // SeedData.push(currentModel.update({upsert: true}));
-}
-Promise.all(SeedData);
+// for (let i = 0; i < 100; i++) {
+//   let generatedData = data.objectCreation(i);
+//   let currentModel = new HeaderModel(generatedData);
+//   SeedData.push(currentModel.save());
+// .catch((err) => {
+//   throw new Error(err);
+// });
+// SeedData.push(currentModel.update({upsert: true}));
+// }
+// Promise.all(SeedData);
 
 let getDbData = (id) => {
   return HeaderModel.find({identifier: id});
