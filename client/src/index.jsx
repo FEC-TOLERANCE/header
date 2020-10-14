@@ -8,7 +8,7 @@ class Header extends React.Component {
 
     this.state = {
       itemId: 1,
-      fundingGoal: 0
+      fundingGoal: ''
     };
     this.getItemId = this.getItemId.bind(this);
   }
@@ -30,7 +30,6 @@ class Header extends React.Component {
   componentDidMount() {
     this.getItemId();
   }
-
 
   render() {
     return (
