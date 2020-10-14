@@ -1,3 +1,4 @@
+
 const axios = require('axios');
 const key = require('../config.js');
 
@@ -21,7 +22,6 @@ let date = (future) => {
     return month + '.' + day + '.' + year;
   }
 };
-
 let number = (length, decimals) => {
   let value = [];
   let afterDecimal = [];
@@ -123,6 +123,7 @@ let objectCreation = (counter) => {
       backing: {
         fundingGoal: fundingGoal,
         amountFunded: pledged,
+
         backers: backers,
         description: paragraph,
         daysRemaining: days,
