@@ -1,4 +1,3 @@
-
 let mongoose = require('mongoose');
 let data = require('./dataGeneration.js');
 
@@ -14,10 +13,7 @@ connection.once('open', () => {
 const { Schema } = mongoose;
 
 let headerSchema = {
-  identifier: {
-    type: Number,
-    unique: true
-  },
+  identifier: Number,
   backing: {
     fundingGoal: Number,
     amountFunded: Number,
@@ -40,34 +36,22 @@ let headerSchema = {
 const HeaderModel = mongoose.model('headerData', new Schema (headerSchema));
 let SeedData = [];
 
-
 HeaderModel.find({})
   .then((requestData) => {
-    console.log('data', requestData);
     if (requestData.length < 100) {
       for (let i = 0; i < 100; i++) {
         let generatedData = data.objectCreation(i);
         let currentModel = new HeaderModel(generatedData);
         SeedData.push(currentModel.save());
-
       }
     }
   })
   .then(() => {
-    console.log('SeedData', SeedData);
     Promise.all(SeedData);
   })
   .catch((err) => {
-    console.log('error seeding data', err);
+    throw new Error(err);
   });
-
-
-// SeedData.push(currentModel.update({upsert: true}));
-// .catch((err) => {
-//   throw new Error(err);
-// });
-
-
 
 let getDbData = (id) => {
   return HeaderModel.find({identifier: id});
