@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-let data = require('./dataGeneration.js');
+let database = require('./dataGeneration.js');
 
 const db = mongoose.connect('mongodb://localhost/header', {useNewUrlParser: true, useUnifiedTopology: true})
   .catch(error => handleError(error));
@@ -40,7 +40,7 @@ HeaderModel.find({})
   .then((requestData) => {
     if (requestData.length < 100) {
       for (let i = 0; i < 100; i++) {
-        let generatedData = data.objectCreation(i);
+        let generatedData = database.objectCreation(i);
         let currentModel = new HeaderModel(generatedData);
         SeedData.push(currentModel.save());
       }

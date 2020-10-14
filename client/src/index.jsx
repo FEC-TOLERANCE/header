@@ -17,7 +17,6 @@ class Header extends React.Component {
     let splitComponentUrl = window.location.href.split('/');
     let urlWithoutEndpoint = splitComponentUrl[0] + '//' + splitComponentUrl[2].slice(0, 12) + '04';
     let endpoint = '/funding/' + splitComponentUrl[3];
-    console.log(urlWithoutEndpoint + endpoint);
     axios.get(urlWithoutEndpoint + endpoint)
       .then((fundingData) => {
         this.setState({'fundingGoal': fundingData.data.backing.fundingGoal});
