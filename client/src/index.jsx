@@ -20,11 +20,9 @@ class Header extends React.Component {
     console.log(urlWithoutEndpoint + endpoint);
     axios.get(urlWithoutEndpoint + endpoint)
       .then((fundingData) => {
-        console.log(fundingData);
         this.setState({'fundingGoal': fundingData.data.backing.fundingGoal});
       })
       .catch((err) => {
-        console.log('err with dynamic render request', err);
         throw new Error(err);
       });
   }
