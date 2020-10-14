@@ -1,8 +1,7 @@
-
 let mongoose = require('mongoose');
-let data = require('./dataGeneration.js');
+let database = require('./dataGeneration.js');
 
-const db = mongoose.connect('mongodb://localhost/videoHeader', {useNewUrlParser: true, useUnifiedTopology: true})
+const db = mongoose.connect('mongodb://localhost/header', {useNewUrlParser: true, useUnifiedTopology: true})
   .catch(error => handleError(error));
 const connection = mongoose.connection;
 connection.on('error', () => {
@@ -36,16 +35,23 @@ let headerSchema = {
 
 const HeaderModel = mongoose.model('headerData', new Schema (headerSchema));
 let SeedData = [];
-// for (let i = 0; i < 100; i++) {
-//   let generatedData = data.objectCreation(i);
-//   let currentModel = new HeaderModel(generatedData);
-//   SeedData.push(currentModel.save());
-// .catch((err) => {
-//   throw new Error(err);
-// });
-// SeedData.push(currentModel.update({upsert: true}));
-// }
-// Promise.all(SeedData);
+
+HeaderModel.find({})
+  .then((requestData) => {
+    if (requestData.length < 100) {
+      for (let i = 0; i < 100; i++) {
+        let generatedData = database.objectCreation(i);
+        let currentModel = new HeaderModel(generatedData);
+        SeedData.push(currentModel.save());
+      }
+    }
+  })
+  .then(() => {
+    Promise.all(SeedData);
+  })
+  .catch((err) => {
+    throw new Error(err);
+  });
 
 let getDbData = (id) => {
   return HeaderModel.find({identifier: id});

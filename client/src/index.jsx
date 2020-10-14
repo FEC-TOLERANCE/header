@@ -2,43 +2,42 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-class App extends React.Component {
+class Header extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       itemId: 1,
-      fundingGoal: 0
+      fundingGoal: ''
     };
     this.getItemId = this.getItemId.bind(this);
   }
 
   getItemId() {
     let splitComponentUrl = window.location.href.split('/');
-    console.log('split component', splitComponentUrl);
-    let urlWithId = splitComponentUrl[0] + '//' + splitComponentUrl[2] + '/funding/' + splitComponentUrl[3];
-    // axios.get(urlWithId)
-    //   .then((fundingData) => {
-    //     this.setState({'itemId': fundingData.identifier});
-    //   })
-    //   .catch((err) => {
-    //     throw new Error(err);
-    //   });
+    let urlWithoutEndpoint = splitComponentUrl[0] + '//' + splitComponentUrl[2].slice(0, 12) + '04';
+    let endpoint = '/funding/' + splitComponentUrl[3];
+    axios.get(urlWithoutEndpoint + endpoint)
+      .then((fundingData) => {
+        this.setState({'fundingGoal': fundingData.data.backing.fundingGoal});
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   }
 
   componentDidMount() {
     this.getItemId();
   }
 
-
   render() {
     return (
       <div>
         <div className="panel">
-          <h1>Kickstarter Header</h1>
+          <h1>Header</h1>
           <nav className="nav">
             <div>
-              {/* Funding Goal {this.state.fundingGoal} */}
+              Funding Goal {this.state.fundingGoal}
             </div>
             <div>
               Amount Funded
@@ -51,7 +50,7 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<Header />, document.getElementById('header'));
 
 
 
