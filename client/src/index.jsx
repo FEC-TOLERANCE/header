@@ -12,7 +12,7 @@ class Header extends React.Component {
     };
     this.getItemId = this.getItemId.bind(this);
   }
-
+  ////
   getItemId() {
     let splitComponentUrl = window.location.href.split('/');
     let urlWithoutEndpoint = splitComponentUrl[0] + '//' + splitComponentUrl[2].slice(0, 12) + '04';
