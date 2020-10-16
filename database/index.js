@@ -47,6 +47,7 @@ HeaderModel.find({})
     }
   })
   .then(() => {
+    console.log('SeedData', SeedData);
     Promise.all(SeedData);
   })
   .catch((err) => {
