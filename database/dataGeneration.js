@@ -1,6 +1,6 @@
 
 const axios = require('axios');
-const key = require('../config.js');
+// const key = require('../config.js');
 
 let randomUpTo = (num) => {
   let numStr = Math.floor(Math.random() * (num));
