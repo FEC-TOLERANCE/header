@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+const axios = require('axios');
 
 class Header extends React.Component {
   constructor(props) {
