@@ -17,17 +17,18 @@ let headerSchema = {
   backing: {
     fundingGoal: Number,
     amountFunded: Number,
+    newFundersPercent: Number,
     backers: Number,
     daysRemaining: Number,
     fundingStatus: {
       plan: String,
       endDate: Date,
       alreadyFunded: String,
+      title: String,
+      headline: String
     }
   },
   header: {
-    title: String,
-    headline: String,
     videoUrl: String,
     thumbnail: String,
   }
