@@ -116,6 +116,7 @@ let objectCreation = (counter) => {
   let header = title(randomUpTo(7));
   let paragraph = description(randomUpTo(500));
   let endDate = date(true);
+  let percentNew = randomUpTo(100) / 100;
 
   let generateData = () => {
     let randomizedData = {
@@ -123,14 +124,15 @@ let objectCreation = (counter) => {
       backing: {
         fundingGoal: fundingGoal,
         amountFunded: pledged,
-
+        newFundersPercent: percentNew,
         backers: backers,
         description: paragraph,
         daysRemaining: days,
         endDate: endDate,
+        title: header,
+        headline: paragraph
       },
       header: {
-        title: header,
         videoUrl: 'https://www.youtube.com/watch?v=fBYvHHT8fdE',
         thumbnail: 'thumbnail'
       }
