@@ -63,7 +63,7 @@ class Header extends React.Component {
                   ${this.state.amountFunded}
                 </span>
               </div>
-              <span className="pledge goal dark-grey">
+              <span className="pledged label dark-grey">
                 pledged of ${this.state.fundingGoal} goal
               </span>
             </div>
@@ -71,15 +71,15 @@ class Header extends React.Component {
               <div className="backers dark-grey bold">
                 <span>{this.state.backers}</span>
               </div>
-              <span className="backers label dark-grey">backers</span>
+              <span className="backers label grey">backers</span>
             </div>
             <div className="remaining time">
               <div>
                 <div className="days remaining">
                   <div>
-                    <span className="block dark-grey-500">{this.state.daysRemaining}</span>
+                    <span className="block dark-grey 500">{this.state.daysRemaining}</span>
                   </div>
-                  <span className="block navy-600">days remaining</span>
+                  <span className="daysRemaining label block navy-600">days remaining</span>
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@ class Header extends React.Component {
             <div className="reminder and social-media">
               <div className="block basics">
                 <div>
-                  <button className="button medium hover icon fill">
+                  <button className="remind button medium hover icon fill">
                     Remind me
                   </button>
                 </div>
