@@ -20,6 +20,9 @@ let headerSchema = {
     newFundersPercent: Number,
     backers: Number,
     daysRemaining: Number,
+    description: String,
+    title: String,
+    headline: String,
     fundingStatus: {
       plan: String,
       endDate: Date,

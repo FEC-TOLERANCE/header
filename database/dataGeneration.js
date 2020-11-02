@@ -82,6 +82,7 @@ let description = (length) => {
   }
   if (results[results.length - 1] === ',') {
     results += descriptionList[(Math.floor(Math.random() * (descriptionList.length)))].toLowerCase() + '.';
+    return results;
   } else if (results[results.length - 1] === '.' || results[results.length - 1] === '?') {
     return results;
   } else {
@@ -130,7 +131,7 @@ let objectCreation = (counter) => {
         daysRemaining: days,
         endDate: endDate,
         title: header,
-        headline: paragraph
+        headline: headline
       },
       header: {
         videoUrl: 'https://www.youtube.com/watch?v=fBYvHHT8fdE',

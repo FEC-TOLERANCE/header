@@ -8,6 +8,8 @@ const PORT = 3004;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/../client/dist'));
+
 app.use('/:id', express.static(__dirname + '/../client/dist'));
 
 app.get('/funding/:id', (req, res) => {

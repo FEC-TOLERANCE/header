@@ -6,6 +6,8 @@ const axios = require('axios');
 class Header extends React.Component {
   constructor(props) {
     super(props);
+    this.getItemId = this.getItemId.bind(this);
+    this.getItemId();
 
     this.state = {
       itemId: 1,
@@ -19,7 +21,6 @@ class Header extends React.Component {
       title: 'title',
       headline: 'paragraph'
     };
-    this.getItemId = this.getItemId.bind(this);
   }
 
   getItemId() {
@@ -32,7 +33,7 @@ class Header extends React.Component {
           'fundingGoal': fundingData.data.backing.fundingGoal,
           'amountFunded': fundingData.data.backing.amountFunded,
           'backers': fundingData.data.backing.backers,
-          'description': fundingData.data.backing.description,
+          // 'description': fundingData.data.backing.description,
           'backers': fundingData.data.backing.backers,
           'daysRemaining': fundingData.data.backing.daysRemaining,
         });
@@ -40,10 +41,6 @@ class Header extends React.Component {
       .catch((err) => {
         throw new Error(err);
       });
-  }
-
-  componentDidMount() {
-    this.getItemId();
   }
 
   render() {
@@ -59,27 +56,27 @@ class Header extends React.Component {
             <div className="pledged">
               <div className="num nowrap"></div>
               <div className="totalPledged">
-                <span className="pledged value green bold">
+                <span className="pledged data green bold">
                   ${this.state.amountFunded}
                 </span>
               </div>
-              <span className="pledge goal dark-grey">
+              <span className="pledged data value label dark-grey">
                 pledged of ${this.state.fundingGoal} goal
               </span>
             </div>
             <div className="backers">
-              <div className="backers dark-grey bold">
+              <div className="backers value dark-grey bold">
                 <span>{this.state.backers}</span>
               </div>
-              <span className="backers label dark-grey">backers</span>
+              <span className="backers label grey">backers</span>
             </div>
             <div className="remaining time">
               <div>
                 <div className="days remaining">
                   <div>
-                    <span className="block dark-grey-500">{this.state.daysRemaining}</span>
+                    <span className="block data dark-grey 500">{this.state.daysRemaining}</span>
                   </div>
-                  <span className="block navy-600">days remaining</span>
+                  <span className="daysRemaining label block navy-600">days remaining</span>
                 </div>
               </div>
             </div>
@@ -89,7 +86,7 @@ class Header extends React.Component {
             <div className="reminder and social-media">
               <div className="block basics">
                 <div>
-                  <button className="button medium hover icon fill">
+                  <button className="remind button medium hover icon fill">
                     Remind me
                   </button>
                 </div>
