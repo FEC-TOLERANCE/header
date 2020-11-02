@@ -11,12 +11,6 @@
   padding: 0px, 18px;
 }
 
-.pledged {
-  font-size: 28px;
-  text-align: left;
-  position: relative;
-}
-
 .green {
   color: #009E74;
 }
@@ -32,4 +26,14 @@
 
 .grey {
   color: grey;
+}
+
+/* .data {
+  font-size: 28px;
+  text-align: left;
+  position: relative;
+} */
+
+.value {
+  font-size: 28px;
 }
