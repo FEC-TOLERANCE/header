@@ -7,6 +7,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.getItemId = this.getItemId.bind(this);
+    this.changeProgress = this.changeProgress.bind(this);
     this.getItemId();
 
     this.state = {
@@ -29,11 +30,13 @@ class Header extends React.Component {
     let endpoint = '/funding/' + splitComponentUrl[3];
     axios.get(urlWithoutEndpoint + endpoint)
       .then((fundingData) => {
+        console.log('fundingData', fundingData);
         this.setState({
           'fundingGoal': fundingData.data.backing.fundingGoal,
           'amountFunded': fundingData.data.backing.amountFunded,
           'backers': fundingData.data.backing.backers,
-          // 'description': fundingData.data.backing.description,
+          'description': fundingData.data.backing.description,
+          'title': fundingData.data.backing.title,
           'backers': fundingData.data.backing.backers,
           'daysRemaining': fundingData.data.backing.daysRemaining,
         });
@@ -41,6 +44,11 @@ class Header extends React.Component {
       .catch((err) => {
         throw new Error(err);
       });
+  }
+
+  changeProgress() {
+    let element = document.getElementById("progressBar");
+    let width = 1;
   }
 
   render() {
@@ -51,16 +59,19 @@ class Header extends React.Component {
           <p className="description">{this.state.description}</p>
         </div>
         <div className="fundingStatus">
+          <div id="progressBar" className="fundingProgress green" onChange={this.changeProgress()}></div>
           <div className="topSpacing"></div>
           <div className="fundingInfo">
             <div className="pledged">
               <div className="num nowrap"></div>
               <div className="totalPledged">
                 <span className="pledged data green bold">
+                <a href="#" className="far fa-usd-circle"></a>
                   ${this.state.amountFunded}
+
                 </span>
               </div>
-              <span className="pledged data value label dark-grey">
+              <span className="pledged label">
                 pledged of ${this.state.fundingGoal} goal
               </span>
             </div>
@@ -74,45 +85,46 @@ class Header extends React.Component {
               <div>
                 <div className="days remaining">
                   <div>
-                    <span className="block data dark-grey 500">{this.state.daysRemaining}</span>
+                    <span className="block data value dark-grey 500">{this.state.daysRemaining}</span>
                   </div>
-                  <span className="daysRemaining label block navy-600">days remaining</span>
+                  <span className="daysRemaining label block navy-600">days to go</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="bottom buttons">
-            <a className="back-project-button large green" href="" type="button">Back this project</a>
+            <a className="back-project button large green" href="" type="button">Back this project</a>
             <div className="reminder and social-media">
-              <div className="block basics">
-                <div>
-                  <button className="remind button medium hover icon fill">
+              <span className="block basics">
+                <span>
+                  <button className="remind medium hover icon fill">
+                    <a href='#' className="fa fa-bookmark">  </a>
                     Remind me
                   </button>
-                </div>
-              </div>
-              <div className="social">
-                <div className="small icons">
-                  <div className="flex items-center">
-                    <div className="facebook inline-block mx4">
+                </span>
+              </span>
+              <span className="social">
+                <span className="small icons">
+                  <span className="flex items-center">
+                    <span className="facebook inline-block mx4">
                       <a href="#" className="fa fa-facebook"></a>
-                    </div>
-                    <div className="twitter inline-block mr4">
+                    </span>
+                    <span className="twitter inline-block mr4">
                       <a href="#" className="fa fa-twitter"></a>
-                    </div>
-                    <div className="mail inline-block mr4">
+                    </span>
+                    <span className="mail inline-block mr4">
                       <a href="#" className="fa fa-envelope"></a>
-                    </div>
-                    <div className="link inline-block mr4">
-                      <a href="#" className="fa fa-link"></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    </span>
+                    <span className="link inline-block mr4">
+                      <a href="#" className="fal fa-link"></a>
+                    </span>
+                  </span>
+                </span>
+              </span>
               <div>
                 <p className="mb3 mb0-lg type-12">
-                  <span className="link-soft-black-medium">All or nothing.</span>
-                  <span className="deadline">This project will only be funded if it reaches its goal by Halloween.</span>
+                  <span className="deadline underline">All or nothing.</span>
+                  <span className="deadline"> This project will only be funded if it reaches its goal by Halloween.</span>
                 </p>
               </div>
             </div>
