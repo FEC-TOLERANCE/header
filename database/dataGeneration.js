@@ -115,7 +115,7 @@ let objectCreation = (counter) => {
   let days = randomUpTo(200);
   let headline = description(randomUpTo(40));
   let header = title(randomUpTo(7));
-  let paragraph = description(randomUpTo(500));
+  let paragraph = description(randomUpTo(40));
   let endDate = date(true);
   let percentNew = randomUpTo(100) / 100;
 

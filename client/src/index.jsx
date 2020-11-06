@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faLink } from '@fortawesome/free-solid-svg-icons';
 const axios = require('axios');
 
 class Header extends React.Component {
@@ -40,6 +42,7 @@ class Header extends React.Component {
           'backers': fundingData.data.backing.backers,
           'daysRemaining': fundingData.data.backing.daysRemaining,
         });
+        this.changeProgress();
       })
       .catch((err) => {
         throw new Error(err);
@@ -47,14 +50,21 @@ class Header extends React.Component {
   }
 
   changeProgress() {
-    // let element = document.getElementById("progressBar");
-    // console.log('element', element);
-    // let percent = this.state.amountFunded / this.state.fundingGoal;
-    // if (percent < 1) {
-    //   element.style.width = percent + "%";
-    // } else {
-    //   element.style.width = 1;
-    // }
+    let element = document.getElementById("progressBar");
+    console.log('element', element);
+    let percent = this.state.fundingGoal / this.state.amountFunded;
+    console.log('percent', percent);
+    if (percent < 1) {
+      console.log('element.style.width', element.style.width);
+      element.style.width = percent * 100 + "%";
+      console.log('element.style.width', element.style.width);
+    } else {
+      element.style.width = 100 + '%';
+    }
+  }
+
+  componentDidMount() {
+    this.changeProgress();
   }
 
   render() {
@@ -66,7 +76,7 @@ class Header extends React.Component {
         </div>
         <div className="fundingStatus">
           <div id="progress" className="fundingProgress green">
-            <div id="progressBar" onChange={this.changeProgress()}></div>
+            <div id="progressBar"></div>
           </div>
           <div className="topSpacing"></div>
           <div className="fundingInfo">
@@ -74,9 +84,8 @@ class Header extends React.Component {
               <div className="num nowrap"></div>
               <div className="totalPledged">
                 <span className="pledged data green bold">
-                <a href="#" className="far fa-usd-circle"></a>
                   ${this.state.amountFunded}
-
+                  <a href="#" className="fas fa-dollar-sign"></a>
                 </span>
               </div>
               <span className="pledged label">
@@ -124,7 +133,8 @@ class Header extends React.Component {
                       <a href="#" className="fa fa-envelope"></a>
                     </span>
                     <span className="link inline-block mr4">
-                      <a href="#" className="fas fa-link"></a>
+                      {/* <FontAwesomeIcon className="faLink" icon="fa-link"/> */}
+                      {/* <a href="#" className="fas fa-link"></a> */}
                     </span>
                   </span>
                 </span>

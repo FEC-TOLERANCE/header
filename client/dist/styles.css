@@ -4,8 +4,13 @@
 
 #progress {
   width: 100%;
+  /* background-color:grey; */
   background-color: #009E74;
   height: 0.6rem;
+}
+
+#progressBar {
+  background-color: #009E74;
 }
 
 .heading {
