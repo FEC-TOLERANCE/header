@@ -47,8 +47,14 @@ class Header extends React.Component {
   }
 
   changeProgress() {
-    let element = document.getElementById("progressBar");
-    let width = 1;
+    // let element = document.getElementById("progressBar");
+    // console.log('element', element);
+    // let percent = this.state.amountFunded / this.state.fundingGoal;
+    // if (percent < 1) {
+    //   element.style.width = percent + "%";
+    // } else {
+    //   element.style.width = 1;
+    // }
   }
 
   render() {
@@ -59,7 +65,9 @@ class Header extends React.Component {
           <p className="description">{this.state.description}</p>
         </div>
         <div className="fundingStatus">
-          <div id="progressBar" className="fundingProgress green" onChange={this.changeProgress()}></div>
+          <div id="progress" className="fundingProgress green">
+            <div id="progressBar" onChange={this.changeProgress()}></div>
+          </div>
           <div className="topSpacing"></div>
           <div className="fundingInfo">
             <div className="pledged">
@@ -116,7 +124,7 @@ class Header extends React.Component {
                       <a href="#" className="fa fa-envelope"></a>
                     </span>
                     <span className="link inline-block mr4">
-                      <a href="#" className="fal fa-link"></a>
+                      <a href="#" className="fas fa-link"></a>
                     </span>
                   </span>
                 </span>

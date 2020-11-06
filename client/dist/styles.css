@@ -2,6 +2,12 @@
   font-family: "Maison Neue" sans-serif;
 }
 
+#progress {
+  width: 100%;
+  background-color: #009E74;
+  height: 0.6rem;
+}
+
 .heading {
   color: black;
   text-align: center;
@@ -65,4 +71,20 @@
 
 .underline {
   text-decoration: underline;
+}
+
+.fa-twitter {
+  color: lightblue;
+}
+
+.fa-facebook {
+  color: blue;
+}
+
+.fa-envelope {
+  color: grey;
+}
+
+.fa-bookmark {
+  color: grey;
 }
