@@ -1,6 +1,5 @@
 
 let path = require('path');
-//bundle.js will be create by below file???
 var SRC_DIR = path.join(__dirname, '/client/src');
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
@@ -21,7 +20,7 @@ module.exports = {
       }
     },
     {
-      test: /\.css$/,
+      test: /\.css$/i,
       use: ['style-loader', 'css-loader']
     }]
   }
