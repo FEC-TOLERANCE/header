@@ -34,10 +34,10 @@ class Header extends React.Component {
     let urlWithoutEndpoint = splitComponentUrl[0] + '//' + splitComponentUrl[2].slice(0, 12) + ':3004';
     let endpoint = '/funding/' + splitComponentUrl[3];
     let request = urlWithoutEndpoint + endpoint;
-    if (urlWithoutEndpoint[7] ==='l') {
-      //check if on local host or deployed
-      request = urlWithoutEndpoint.slice(0, 16) + urlWithoutEndpoint.slice(19, urlWithoutEndpoint.length) + endpoint
-    }
+    // if (urlWithoutEndpoint[7] ==='l') {
+    //   //check if on local host or deployed
+    //   request = urlWithoutEndpoint.slice(0, 16) + urlWithoutEndpoint.slice(19, urlWithoutEndpoint.length) + endpoint
+    // }
     axios.get(request)
       .then((fundingData) => {
         this.setState({
