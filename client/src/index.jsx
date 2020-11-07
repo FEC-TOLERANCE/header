@@ -38,6 +38,7 @@ class Header extends React.Component {
     //   //check if on local host or deployed
     //   request = urlWithoutEndpoint.slice(0, 16) + '/3004' urlWithoutEndpoint.slice(19, urlWithoutEndpoint.length) + endpoint
     // }
+    console.log('request', request);
     axios.get(request)
       .then((fundingData) => {
         this.setState({

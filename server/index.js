@@ -14,8 +14,15 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.use('/:id', express.static(__dirname + '/../client/dist'));
 
+app.get('/styles.css', (req, res) => {
+  res.send(path.join(__dirname, '../client/styles.css'));
+})
+
 app.get('/funding/:id', (req, res) => {
   let id = parseInt(req.params.id);
+  if (!id) {
+    id = 3;3
+  }
   if (typeof id !== 'number') {
     res.status(400).send('invalid id, enter number');
   } else if (id > 100) {
