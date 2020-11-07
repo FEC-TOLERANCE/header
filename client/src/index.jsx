@@ -31,6 +31,7 @@ class Header extends React.Component {
     let splitComponentUrl = window.location.href.split('/');
     let urlWithoutEndpoint = splitComponentUrl[0] + '//' + splitComponentUrl[2].slice(0, 12) + '04';
     let endpoint = '/funding/' + splitComponentUrl[3];
+    console.log('axios request', urlWithoutEndpoint, endpoint)
     axios.get(urlWithoutEndpoint + endpoint)
       .then((fundingData) => {
         console.log('fundingData', fundingData);
