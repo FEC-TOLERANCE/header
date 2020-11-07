@@ -11,6 +11,8 @@ class Header extends React.Component {
     super(props);
     this.getItemId = this.getItemId.bind(this);
     this.changeProgress = this.changeProgress.bind(this);
+    this.numberWithCommas = this.numberWithCommas.bind(this);
+    this.getEndDate = this.getEndDate.bind(this);
     this.getItemId();
 
     this.state = {
@@ -31,10 +33,13 @@ class Header extends React.Component {
     let splitComponentUrl = window.location.href.split('/');
     let urlWithoutEndpoint = splitComponentUrl[0] + '//' + splitComponentUrl[2].slice(0, 12) + ':3004';
     let endpoint = '/funding/' + splitComponentUrl[3];
-    console.log('axios request', urlWithoutEndpoint, endpoint)
-    axios.get(urlWithoutEndpoint + endpoint)
+    let request = urlWithoutEndpoint + endpoint;
+    if (urlWithoutEndpoint[7] ==='l') {
+      //check if on local host or deployed
+      request = urlWithoutEndpoint.slice(0, 16) + urlWithoutEndpoint.slice(19, urlWithoutEndpoint.length) + endpoint
+    }
+    axios.get(request)
       .then((fundingData) => {
-        console.log('fundingData', fundingData);
         this.setState({
           'fundingGoal': fundingData.data.backing.fundingGoal,
           'amountFunded': fundingData.data.backing.amountFunded,
@@ -53,20 +58,29 @@ class Header extends React.Component {
 
   changeProgress() {
     let element = document.getElementById("progressBar");
-    console.log('element', element);
     let percent = this.state.fundingGoal / this.state.amountFunded;
-    console.log('percent', percent);
     if (percent < 1) {
-      console.log('element.style.width', element.style.width);
       element.style.width = percent * 100 + "%";
-      console.log('element.style.width', element.style.width);
     } else {
       element.style.width = 100 + '%';
     }
   }
 
+  numberWithCommas(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   componentDidMount() {
     this.changeProgress();
+  }
+
+  getEndDate() {
+    let date = new Date();
+    date.setDate(date.getDate() + this.state.daysRemaining);
+
+    date = date.toDateString();
+    return date.slice(0,3) + ',' + date.slice(3, date.length);
+
   }
 
   render() {
@@ -86,17 +100,17 @@ class Header extends React.Component {
               <div className="num nowrap"></div>
               <div className="totalPledged">
                 <span className="pledged data green bold">
-                  ${this.state.amountFunded}
+                  ${this.numberWithCommas(this.state.amountFunded)}
                   <a href="#" className="fas fa-dollar-sign"></a>
                 </span>
               </div>
               <span className="pledged label">
-                pledged of ${this.state.fundingGoal} goal
+                pledged of ${this.numberWithCommas(this.state.fundingGoal)} goal
               </span>
             </div>
             <div className="backers">
               <div className="backers value dark-grey bold">
-                <span>{this.state.backers}</span>
+                <span>{this.numberWithCommas(this.state.backers)}</span>
               </div>
               <span className="backers label grey">backers</span>
             </div>
@@ -104,7 +118,7 @@ class Header extends React.Component {
               <div>
                 <div className="days remaining">
                   <div>
-                    <span className="block data value dark-grey 500">{this.state.daysRemaining}</span>
+                    <span className="block data value dark-grey 500">{this.numberWithCommas(this.state.daysRemaining)}</span>
                   </div>
                   <span className="daysRemaining label block navy-600">days to go</span>
                 </div>
@@ -144,7 +158,7 @@ class Header extends React.Component {
               <div>
                 <p className="mb3 mb0-lg type-12">
                   <span className="deadline underline">All or nothing.</span>
-                  <span className="deadline"> This project will only be funded if it reaches its goal by Halloween.</span>
+                  <span className="deadline"> This project will only be funded if it reaches its goal by {this.getEndDate()}.</span>
                 </p>
               </div>
             </div>
