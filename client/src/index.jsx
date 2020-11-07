@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import css from '../dist/styles.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faLink } from '@fortawesome/free-solid-svg-icons';
 const axios = require('axios');
