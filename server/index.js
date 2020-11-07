@@ -4,8 +4,10 @@ const cors = require('cors');
 const db = require('../database/index.js');
 const app = express();
 const PORT = 3004;
+const compression = require('compression');
 
 app.use(cors());
+app.use(compression({ filter: shouldCompress }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));

@@ -1,3 +1,4 @@
+
 let path = require('path');
 //bundle.js will be create by below file???
 var SRC_DIR = path.join(__dirname, '/client/src');
@@ -7,6 +8,7 @@ module.exports = {
     path: path.join(__dirname, 'client/dist'),
     filename: 'bundle.js'
   },
+  mode: 'production',
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -24,3 +26,4 @@ module.exports = {
     }]
   }
 };
+
