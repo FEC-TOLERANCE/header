@@ -39,7 +39,6 @@ class Header extends React.Component {
     //   request = urlWithoutEndpoint.slice(0, 16) + '/3004' urlWithoutEndpoint.slice(19, urlWithoutEndpoint.length) + endpoint
     // }
     console.log('request', request);
-    request = 'http://100.26.210.6:3004/5/styles.css';
     axios.get(request)
       .then((fundingData) => {
         this.setState({
